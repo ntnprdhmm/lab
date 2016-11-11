@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>La perspective</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 100px;
+            margin: 20px;
+            background: #333;
+            display: inline-block;
+        }
+        .perspective {
+            transform: perspective(600px) rotateX(-45deg);
+        }
+        .perspective-notfar {
+            transform: perspective(200px) rotateX(-45deg);
+        }
+        .perspective-container {
+            perspective: 600px;
+        }
+        .perspective-container .box {
+            transform: rotateX(-45deg);
+        }
+        .move-vanishing-point {
+            perspective-origin: 25% 75%;
+            perspective: 200px;
+        }
+        .move-vanishing-point .box {
+            transform: rotateX(20deg);
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS 3d perspective</h1>
+    <p>Perspective is required for 3D.</p>
+    <p>
+        <h2>Apply on children directly (600px)</h2>
+        <div class="perspective box"></div>
+        <div class="perspective box"></div>
+        <div class="perspective box"></div>
+    </p>
+    <p>
+        <h2>Apply on children directly (200px)</h2>
+        <div class="perspective-notfar box"></div>
+        <div class="perspective-notfar box"></div>
+        <div class="perspective-notfar box"></div>
+    </p>
+    <p>
+        <h2>Apply on parent for children</h2>
+        <div class="perspective-container">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+        </div>
+    </p>
+    <p>
+        <h2>Move the Vanishing point</h2>
+        <div class="move-vanishing-point">
+            <div class="box"></div>
+        </div>
+    </p>
+</body>
+</html>
