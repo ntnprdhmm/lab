@@ -5,6 +5,7 @@
     <title>Preserve 3d</title>
     <link rel="stylesheet" href="global-style.css">
     <style>
+        /* cube */
         .container {
             -webkit-perspective: 600px;
         }
@@ -56,6 +57,38 @@
                 -webkit-transform: translateZ(-100px) rotateX(360deg) rotateY(360deg);
             }
         }
+        /* flip */
+        .container-flip {
+            width: 150px;
+            height: 300px;
+            position: relative;
+            margin: 0 auto 40px;
+            border: 1px solid #CCC;
+            -webkit-perspective: 800;
+        }
+        #flip {
+            width: 100%;
+            height: 100%;  
+            -webkit-transition: -webkit-transform 1s;
+            -webkit-transform-style: preserve-3d;
+        }
+        #faceA, #faceB {
+            display:block;
+            width:100%;
+            height:100%;
+            position: absolute;
+            -webkit-backface-visibility: hidden;
+        }
+        #faceA {
+            background: red;
+        }
+        #faceB {
+            background: blue;
+            -webkit-transform: rotateY(180deg);
+        }
+        #flip.flip-me {
+            -webkit-transform: rotateY(180deg);
+        }
     </style>
 </head>
 <body>
@@ -70,5 +103,18 @@
             <div class="left"></div>
         </div>
     </div>
+    <div class="container-flip">   
+        <div id="flip">
+            <div id="faceA"></div>
+            <div id="faceB"></div>
+        </div>
+    </div>
+    <script>
+        let card = document.getElementById('flip');
+        card.addEventListener('click', function() {
+            console.log('[CLICK] toggle flip-me : ' + card.classList);
+            card.classList.toggle('flip-me');
+        });
+    </script>
 </body>
 </html>
