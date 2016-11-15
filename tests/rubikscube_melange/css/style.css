@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #FAFAFA;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#rubik {
+    background: #000;
+    border-spacing: 5px;
+    position: relative;
+}
+
+.square {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #333;
+}
+
+#title {
+    position: absolute;
+    top: 40px;
+    font-size: 24px;;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+#mix-container {
+    position: absolute;
+    bottom: 10%;
+}
+
+#mix {
+    padding: 10px 25px;
+    font-weight: bold;
+    border: 2px solid #333;
+    background: #FAFAFA;
+    border-radius: 2px;
+}
+
+#mix:hover {
+    cursor: pointer;
+    background: #CE93D8; 
+}
+
+#report {
+    position: absolute;
+    width: 200px;
+    height:500px;
+    border: 2px solid #333;
+    top: 20px;
+    right: 20px;
+    background: #fff;
+    box-shadow: 8px 8px 5px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    overflow-y: scroll;
+}
+
+#report > h2 {
+    text-align: center;
+    margin: 0;
+    padding: 10px 0;
+    border-bottom: 2px solid #333;
+}
+
+.report-container {
+    padding: 5px 0;
+    border-bottom: 2px solid #333;
+    text-align: center;
+}
+
+.report-container:hover {
+    cursor: pointer;
+}
+
+.report-square {
+    width: 15px;
+    height: 15px;
+    padding: 2px 0 2px 2px;
+    border: 1px solid #333;
+    display: inline-block;
+}
+
+/* colors */
+
+.red {
+    background: red;
+}
+.green {
+    background: green;
+}
+.blue {
+    background: blue;
+}
+.yellow {
+    background: yellow;
+}
+.white {
+    background: white;
+}
+.orange {
+    background: orange;
+}

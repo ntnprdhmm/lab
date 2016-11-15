@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pile de citrons</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div id="header">
+            <h1 id="main-title">
+                The lemons stack
+            </h1>
+            <div id="data-infos">
+                <div>
+                    Queries : <span id="number-queries"></span>
+                </div>
+            </div>
+            <div id="current-query">
+                <div id="query-type"></div>
+                <div id="query-message"></div>
+            </div>
+        </div>
+        <div class="container">
+            <!-- left side, where you draw the stack -->
+            <div id="stack-container">
+                <h2 class="column-title">
+                    Lemon boxes stack
+                </h2>
+            </div>
+            <!-- right side, where you write the number of lemons in the boxes -->
+            <div id="infos-container">
+                <h2 class="column-title">
+                    Sold boxes
+                </h2>
+            </div>
+        </div>
+        <script src="js/jquery.min.js"></script>
+        <script src="data/requetes.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>

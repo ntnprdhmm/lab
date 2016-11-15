@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Adopte un citron</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            .input-header {
+                font-weight: bold;
+            }
+            #resultats-container {
+                display: none;
+            }
+            .result {
+                border: 1px solid #333;
+                border-radius: 5px;
+                background: #FFF;
+                max-width: 600px;
+                box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.4);
+                margin-bottom: 10px;
+                padding: 10px;
+            }
+            .result p {
+                width: 100%;
+            }
+            .couleur, .jutosite, .region, .index, .poids {
+                padding-right: 20px;
+            }
+            .jutosite {
+                padding-left: 20px;
+            }
+            .index {
+                font-weight: bold;
+            }
+            .vert {
+                background: green;
+            }
+            .jaune {
+                background: yellow;
+            }
+            .bleue {
+                background: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Adopte un citron</h1>
+            <form>
+                <div class="form-group">
+                    <label for="min">Poids minimum</label>
+                    <input type="text" class="form-control" name="min" id="min">
+                </div>
+                <div class="form-group">
+                    <label for="max">Poids maximum</label>
+                    <input type="text" class="form-control" name="max" id="max">
+                </div>
+                <div class="form-group">
+                    <span class="input-header">Color</span>
+                    <div>
+                        <label class="checkbox-inline"><input type="checkbox" class="color-input" value="vert">Vert</label>
+                        <label class="checkbox-inline"><input type="checkbox" class="color-input" value="jaune">Jaune</label>
+                        <label class="checkbox-inline"><input type="checkbox" class="color-input" value="bleue">Bleue</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="input-header">Jutosité</span>
+                    <div>
+                        <label class="radio-inline"><input type="radio" name="jutosite" value="deseche">deseche</label>
+                        <label class="radio-inline"><input type="radio" name="jutosite" value="a point">a point</label>
+                        <label class="radio-inline"><input type="radio" name="jutosite" value="abondant">abondant</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="region">
+                        <option value="espagne">Espagne</option>
+                        <option value="russie">Russie</option>
+                        <option value="france">France</option>
+                    </select>
+                </div>
+                <button class="btn btn-success" id="search">Lancer la recherche</button>
+            </form>
+            <hr>
+            <div id="resultats-container">
+                <h1>Résultats</h1>
+                <div id="resultats"></div>
+            </div>
+        </div>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="data/citrons.js"></script>
+        <script>
+            $(document).ready(function() {
+                
+                let filters = {}
+
+                $('#search').click(function(e) {
+                    $('#resultats').html('');
+                    e.preventDefault();
+                    resetFilters();
+                    readFilters();
+                    for(let i = 0; i < citrons.length; i++) {
+                        if (!filters.region || (filters.region == citrons[i].region)) {
+                            if(!filters.jutosite || (filters.jutosite == citrons[i].jutosite)) {
+                                if(!filters.colors.length || checkColors(filters.colors, citrons[i].couleur)) {
+                                    if(!filters.poids_min || citrons[i].poids >= filters.poids_min) {
+                                        if(!filters.poids_max || citrons[i].poids <= filters.poids_max) {
+                                            drawResult(citrons[i]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    $('#resultats-container').show();
+                });
+
+                function drawResult(citron) {
+                    let result = $('<div class="result"></div>');
+                    result.append('<p><span class="index">' + citron.index + '</span><span class="poids">' + citron.poids + '</span></p>');
+                    result.append('<p><span class="couleur ' + citron.couleur + '"></span><span class="jutosite">' + citron.jutosite + '</span><span class="region">' + citron.region + '</span></p>');
+                    $('#resultats').append(result);
+                }
+
+                function readFilters() {
+                    filters.poids_min = parseInt($('#min').val());
+                    if (!filters.poids_min || isNan(filters.poids_min)) {
+                        filters.poids_min = null;
+                    }
+                    filters.poids_max = parseInt($('#max').val());
+                    if (!filters.poids_max || isNan(filters.poids_max) || filters.poids_max <= filters.poids_min) {
+                        filters.poids_min = null;
+                    }
+                    $('.color-input:checked').each(function(i, e) {
+                        filters.colors.push($(e).val());
+                    });
+                    filters.jutosite = $('input[name="jutosite"]:checked').val();
+                    filters.region = $('#region').val();
+                }
+
+                function checkColors(couleurs, couleur) {
+                    for(let i = 0; i < couleurs.length; i++) {
+                        if(couleurs[i] == couleur) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
+                function resetFilters() {
+                    filters.poids_min = null;
+                    filters.poids_max = null;
+                    filters.colors = [];
+                    filters.jutosite = null;
+                    filters.region = null;
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,25 @@
++-----------------------+
++ Generateur de citrons +
++-----------------------+
+
+*****
+/   URL
+**
+
+http://beta.json-generator.com/
+
+*****
+/   TEMPLATE
+**
+
+[
+  {
+    'repeat(50)': {
+      index: '{{index()}}',
+      poids: '{{integer(50, 400)}}',
+      couleur: '{{random("vert", "jaune", "bleue")}}',
+      jutosite: '{{random("deseche", "a point", "abondant")}}',
+      region: '{{random("espagne", "russie", "france")}}'
+    }
+  }
+]
