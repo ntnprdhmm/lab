@@ -1,0 +1,86 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    background: #FAFAFA;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow-up {
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 40px solid black;
+}
+
+.pyra-row {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.pyra-row .arrow-up {
+    display: inline-block;
+    margin: 0 1px;
+}
+
+.input-container {
+    position: absolute;
+    border: 1px solid #fff;
+    border-radius: 2px;
+    padding: 10px 20px;
+    top: 10px;
+    right: 10px;
+    background: #311B92;
+}
+
+.input {
+    width: 100px;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.btn {
+    padding: 5px 12px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.blue {
+    border-bottom-color: blue;
+}
+.green {
+    border-bottom-color: green;
+}
+.red {
+    border-bottom-color: red;
+}
+.yellow {
+    border-bottom-color: yellow;
+}
+.orange {
+    border-bottom-color: orange;
+}
+.brown {
+    border-bottom-color: #795548;
+}
+.black {
+    border-bottom-color: #000;
+}
+.grey {
+    border-bottom-color: grey;
+}
+.purple {
+    border-bottom-color: purple;
+}
