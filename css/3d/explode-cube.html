@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Preserve 3d</title>
+    <link rel="stylesheet" href="global-style.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            height: 100%;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* cube */
+        .container {
+            -webkit-perspective: 600px;
+        }
+        .cube {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px; /* center the cube in the page */
+            -webkit-transform-style: preserve-3d;
+            -webkit-transition: 2s;
+            -webkit-transform: translateZ(-100px) rotateX(-220deg) rotateY(45deg); 
+        }
+        .cube * {
+            -webkit-transition: -webkit-transform 1s;
+            background: red;
+            height: 200px;
+            /* step 1 : all at the same place */
+            position: absolute;
+            overflow: hidden;
+            width: 200px;
+            opacity: 0.5;
+            border: 1px solid #333;
+        }
+        .front {
+            -webkit-transform: translateZ(100px);
+        }
+        .back {
+            -webkit-transform: translateZ(-100px);
+        }
+        .left {
+            -webkit-transform: rotateY(90deg) translateZ(100px);
+        }
+        .right {
+            -webkit-transform: rotateY(-90deg) translateZ(100px);
+        }
+        .up {
+            -webkit-transform: rotateX(90deg) translateZ(100px);
+        }
+        .bottom {
+            -webkit-transform: rotateX(-90deg) translateZ(100px);
+        }
+        /* animate cube */
+        .cube.rotation {
+            -webkit-animation: rotateCube 8s infinite ease-in-out;
+        }
+        @-webkit-keyframes rotateCube {
+            0% {
+                -webkit-transform: translateZ(-100px) rotateX(0deg) rotateY(0deg);
+            }   
+            100% {
+                -webkit-transform: translateZ(-100px) rotateX(360deg) rotateY(360deg);
+            }
+        }
+        /* hover */
+        .cube:hover .front{
+            -webkit-transform: translateZ( 300px );
+        }
+        .cube:hover .back{
+            -webkit-transform: translateZ( -300px );
+        }
+        .cube:hover .left{
+            -webkit-transform: rotateY( 90deg ) translateZ( 200px );
+        }
+        .cube:hover .right{
+            -webkit-transform: rotateY( -90deg ) translateZ( 200px );
+        }
+        .cube:hover .up{
+            -webkit-transform: rotateX(90deg) translateZ( 200px );
+        }
+        .cube:hover .bottom{
+            -webkit-transform: rotateX(-90deg) translateZ( 200px );
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="cube rotation">
+            <div class="front"></div>
+            <div class="back"></div>
+            <div class="up"></div>
+            <div class="bottom"></div>
+            <div class="right"></div>
+            <div class="left"></div>
+        </div>
+    </div>
+</body>
+</html>
