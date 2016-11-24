@@ -1,9 +1,16 @@
 class DNA {
 
-    constructor () {
+    /**
+     * Creates an instance of DNA.
+     * 
+     * @param {any} len => the the number of genes of this DNA
+     * 
+     * @memberOf DNA
+     */
+    constructor (len) {
         this.genes = [];
         this.fitness = 0;
-        initGenes();
+        initGenes(len);
     }
 
     /**
