@@ -31,11 +31,11 @@ function draw () {
  * Run the algorithm
  */
 function run () {
+    let i = 0;
     // while the phrase is still not found, run the algorithm
-    while (!app._population.finished) {
+    while (!app._population.finished && i < 500) {
         // generate the mating pool
         app._population.naturalSelection();
-        console.log(app._population);
         // create the next generation
         app._population.generate();
         // calcultate the fitness
@@ -43,6 +43,7 @@ function run () {
         // evaluate
         app._population.evaluate();
         draw();
+        i++;
     }
 }
 

@@ -102,9 +102,9 @@ class DNA {
         let crossPoint = Math.floor(Math.random() * this._genes.length);
         for (let i = 0; i < this._genes.length; i++) {
             if (i > crossPoint) {
-                result[i] = this._genes[i];
+                result._genes[i] = this._genes[i];
             } else {
-                result[i] = dna._genes[i];
+                result._genes[i] = dna._genes[i];
             }
         }
         return result;

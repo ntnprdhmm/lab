@@ -87,6 +87,7 @@ class Population {
         for (let i = 0; i < this._population.length; i++) {
             this._population[i].calcFitness(this._phrase);
         }
+        //console.log(this._population);
     }
 
     /**
