@@ -10,14 +10,15 @@ class Population {
      * @memberOf Population
      */
     constructor (phrase, len, mutation) {
-        this.phrase = phrase;           // the phrase to search
-        this.population = [];           // Array of DNA (the current generation)
-        this.mutation = mutation;       // mutation rate
-        this.generation = 0;            // number of generation 
-        this.matingPool = [];           // the next generation of DNA
-        this.best = "";                 // store the best phrase found in the last generation
-        this.finished = false;          // true when the phrase has been found
-        initPopulation(len, phrase.length);
+        this._phrase = phrase;          // the phrase to search
+        this._population = [];          // Array of DNA (the current generation)
+        this._mutation = mutation;      // mutation rate
+        this._generation = 0;           // number of generation 
+        this._matingPool = [];          // the next generation of DNA
+        this._best = "";                // store the best phrase found in the last generation
+        this._finished = false;         // true when the phrase has been found
+
+        this.initPopulation(len, phrase.length);
     }
 
     /**
@@ -28,7 +29,17 @@ class Population {
      * @memberOf Population
      */
     get best () {
-        return this.best;
+        return this._best;
+    }
+
+    /**
+     * set the best phrase found
+     * 
+     * 
+     * @memberOf Population
+     */
+    set best (b) {
+        this._best = b;
     }
 
     /**
@@ -41,9 +52,9 @@ class Population {
      */
     initPopulation (populationLength, phraseLength) {
         for (let i = 0; i < populationLength; i++) {
-            this.population[i] = new DNA(phraseLength);
+            this._population[i] = new DNA(phraseLength);
         }
-        calcFitness();
+        this.calcFitness();
     }
 
     /**
@@ -53,8 +64,8 @@ class Population {
      * @memberOf Population
      */
     calcFitness () {
-        for (let i = 0; i < this.population.length; i++) {
-            this.population[i].calcFitness(this.phrase);
+        for (let i = 0; i < this._population.length; i++) {
+            this._population[i].calcFitness(this._phrase);
         }
     }
 
@@ -69,17 +80,17 @@ class Population {
         this.matingPool = []; 
         // get the max fitness of the current population
         let maxFitness = 0;
-        for (let i = 0; i < this.population.length; i++) {
-            if (this.population[i].fitness > maxFitness) {
-                maxFitness = this.population[i].fitness;
+        for (let i = 0; i < this._population.length; i++) {
+            if (this._population[i].fitness > maxFitness) {
+                maxFitness = this._population[i].fitness;
             }
         }
         // selection by probability based on DNA fitness
-        for (let i = 0; i < this.population.length; i++) {
-            let fitness = map(this.population[i].fitness,0,maxFitness,0,1);
+        for (let i = 0; i < this._population.length; i++) {
+            let fitness = map(this._population[i].fitness, 0, maxFitness, 0, 1);
             let n = floor(fitness * 100);  
             for (let j = 0; j < n; j++) {              
-                this.matingPool.push(this.population[i]);
+                this._matingPool.push(this._population[i]);
             }
         }
     }
@@ -92,16 +103,16 @@ class Population {
      */
     generate () {
         // Refill the population with DNA selected in the mating pool
-        for (let i = 0; i < this.population.length; i++) {
+        for (let i = 0; i < this._population.length; i++) {
             // choose 2 DNA in the mating pool randomly
-            let dna_a = this.matingPool[Math.floor(Math.random() * this.matingPool.length)];
-            let dna_b = this.matingPool[Math.floor(Math.random() * this.matingPool.length)];
+            let dna_a = this._matingPool[Math.floor(Math.random() * this._matingPool.length)];
+            let dna_b = this._matingPool[Math.floor(Math.random() * this._matingPool.length)];
             // cross the 2 DNA and call mutation function on it
             let child = dna_a.crossover(dna_b);
-            child.mutate(this.mutation);
-            this.population[i] = child;
+            child.mutate(this._mutation);
+            this._population[i] = child;
         }
-        this.generation++;
+        this._generation++;
     }
 
     /**
@@ -114,17 +125,17 @@ class Population {
         let score = 0.0;
         let index = 0;
 
-        for (let i = 0; i < this.population.length; i++) {
-            if (this.population[i].fitness > score) {
+        for (let i = 0; i < this._population.length; i++) {
+            if (this._population[i].fitness > score) {
                 index = i;
-                score = this.population[i].fitness;
+                score = this._population[i].fitness;
             }
         }
 
-        this.best = this.population[i].phrase;
+        this.best = this._population[i].phrase;
         // check if the best phrase is the right
-        if (this.best == 1) {
-            this.finished = true;
+        if (this._best == 1) {
+            this._finished = true;
         }
     }
 

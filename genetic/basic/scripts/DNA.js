@@ -8,9 +8,10 @@ class DNA {
      * @memberOf DNA
      */
     constructor (len) {
-        this.genes = [];
-        this.fitness = 0;
-        initGenes(len);
+        this._genes = [];
+        this._fitness = 0;
+
+        this.initGenes(len);
     }
 
     /**
@@ -22,7 +23,7 @@ class DNA {
      */
     initGenes (len) {
         for (let i = 0; i < len; i++) {
-            this.genes[i] = randomAlphabetChar();
+            this._genes[i] = this.randomAlphabetChar();
         }
     }
 
@@ -46,7 +47,7 @@ class DNA {
      * @memberOf DNA
      */
     get phrase () {
-        return this.genes.join('');
+        return this._genes.join('');
     }
 
     /**
@@ -57,7 +58,17 @@ class DNA {
      * @memberOf DNA
      */
     get fitness () {
-        return this.fitness;
+        return this._fitness;
+    }
+
+    /**
+     * Set the value of fitness
+     * 
+     * 
+     * @memberOf DNA
+     */
+    set fitness (f) {
+        this._fitness = f;
     }
 
     /**
@@ -71,7 +82,7 @@ class DNA {
     calcFitness (target) {
         let score = 0;
         for (let i = 0; i < target.length; i++) {
-            if (this.genes[i] == target[i]) {
+            if (this._genes[i] == target[i]) {
                 score++;
             }
         }
@@ -87,13 +98,13 @@ class DNA {
      * @memberOf DNA
      */
     crossover (dna) {
-        let result = new DNA(this.genes.length);
-        let crossPoint = Math.floor(Math.random() * this.genes.length);
-        for (let i = 0; i < this.genes.length; i++) {
+        let result = new DNA(this._genes.length);
+        let crossPoint = Math.floor(Math.random() * this._genes.length);
+        for (let i = 0; i < this._genes.length; i++) {
             if (i > crossPoint) {
-                result[i] = this.genes[i];
+                result[i] = this._genes[i];
             } else {
-                result[i] = dna.genes[i];
+                result[i] = dna._genes[i];
             }
         }
         return result;
@@ -107,9 +118,9 @@ class DNA {
      * @memberOf DNA
      */
     mutate (rate) {
-        for (let i = 0; i < this.genes.length; i++) {
+        for (let i = 0; i < this._genes.length; i++) {
             if (random(1) < rate) {
-                this.genes[i] = randomAlphabetChar();
+                this._genes[i] = this.randomAlphabetChar();
             }
         }
     }
