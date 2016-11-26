@@ -86,7 +86,7 @@ class DNA {
                 score++;
             }
         }
-        return score / target.length;
+        this._fitness = score / target.length;
     }
 
     /**
@@ -119,7 +119,7 @@ class DNA {
      */
     mutate (rate) {
         for (let i = 0; i < this._genes.length; i++) {
-            if (random(1) < rate) {
+            if (Math.random() < rate) {
                 this._genes[i] = this.randomAlphabetChar();
             }
         }

@@ -43,6 +43,26 @@ class Population {
     }
 
     /**
+     * Is the algorithm finished ?
+     * 
+     * 
+     * @memberOf Population
+     */
+    get finished () {
+        return this._finished;
+    }
+
+    /**
+     * set the finished status of the algorithm
+     * 
+     * 
+     * @memberOf Population
+     */
+    set finished (f) {  
+        this._finished = f;
+    }
+
+    /**
      * Init the population of DNA
      * 
      * @param {any} populationLength
@@ -77,7 +97,7 @@ class Population {
      */
     naturalSelection () {
         // clear the next population
-        this.matingPool = []; 
+        this._matingPool = []; 
         // get the max fitness of the current population
         let maxFitness = 0;
         for (let i = 0; i < this._population.length; i++) {
@@ -85,10 +105,12 @@ class Population {
                 maxFitness = this._population[i].fitness;
             }
         }
+
         // selection by probability based on DNA fitness
         for (let i = 0; i < this._population.length; i++) {
-            let fitness = map(this._population[i].fitness, 0, maxFitness, 0, 1);
-            let n = floor(fitness * 100);  
+            //let fitness = map(this._population[i].fitness, 0, maxFitness, 0, 1);
+            let fitness = !maxFitness ? 0 : this._population[i].fitness / maxFitness;
+            let n = Math.floor(fitness * 100);  
             for (let j = 0; j < n; j++) {              
                 this._matingPool.push(this._population[i]);
             }
@@ -132,7 +154,7 @@ class Population {
             }
         }
 
-        this.best = this._population[i].phrase;
+        this.best = this._population[index].phrase;
         // check if the best phrase is the right
         if (this._best == 1) {
             this._finished = true;
