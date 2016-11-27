@@ -16,6 +16,7 @@ class Population {
         this._generation = 0;           // number of generation 
         this._matingPool = [];          // the next generation of DNA
         this._best = "";                // store the best phrase found in the last generation
+        this._bestScore = 0;            // fitness of the best phrase
         this._finished = false;         // true when the phrase has been found
 
         this.initPopulation(len, phrase.length);
@@ -33,18 +34,9 @@ class Population {
     }
 
     /**
-     * set the best phrase found
-     * 
-     * 
-     * @memberOf Population
-     */
-    set best (b) {
-        this._best = b;
-    }
-
-    /**
      * Is the algorithm finished ?
      * 
+     * @readonly
      * 
      * @memberOf Population
      */
@@ -53,14 +45,16 @@ class Population {
     }
 
     /**
-     * set the finished status of the algorithm
+     * Get the best phrase fitness
      * 
+     * @readonly
      * 
      * @memberOf Population
      */
-    set finished (f) {  
-        this._finished = f;
+    get bestScore () {
+        return this._bestScore;
     }
+
 
     /**
      * Init the population of DNA
@@ -87,7 +81,6 @@ class Population {
         for (let i = 0; i < this._population.length; i++) {
             this._population[i].calcFitness(this._phrase);
         }
-        //console.log(this._population);
     }
 
     /**
@@ -106,12 +99,9 @@ class Population {
                 maxFitness = this._population[i].fitness;
             }
         }
-
         // selection by probability based on DNA fitness
         for (let i = 0; i < this._population.length; i++) {
-            //let fitness = map(this._population[i].fitness, 0, maxFitness, 0, 1);
-            let fitness = !maxFitness ? 0 : this._population[i].fitness / maxFitness;
-            let n = Math.floor(fitness * 100);  
+            let n = Math.floor((this._population[i].fitness / maxFitness) * 100);  
             for (let j = 0; j < n; j++) {              
                 this._matingPool.push(this._population[i]);
             }
@@ -145,7 +135,7 @@ class Population {
      * @memberOf Population
      */
     evaluate () {
-        let score = 0.0;
+        let score = 0;
         let index = 0;
 
         for (let i = 0; i < this._population.length; i++) {
@@ -155,9 +145,10 @@ class Population {
             }
         }
 
-        this.best = this._population[index].phrase;
+        this._best = this._population[index].phrase;
+        this._bestScore = score;
         // check if the best phrase is the right
-        if (this._best == 1) {
+        if (score == 1) {
             this._finished = true;
         }
     }

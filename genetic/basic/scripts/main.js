@@ -24,7 +24,7 @@ function setup () {
  */
 function draw () {
     app._bestElement.innerText = app._population.best;
-    app._histElement.innerHTML += '<p>' + app._population.best +'</p>';
+    app._histElement.innerHTML += '<tr><td>' + app._population.best +'</td><td>' + app._population._bestScore + '</td></tr>';
 }
 
 /**
@@ -33,7 +33,7 @@ function draw () {
 function run () {
     let i = 0;
     // while the phrase is still not found, run the algorithm
-    while (!app._population.finished && i < 500) {
+    while (!app._population.finished && i < 2000) {
         // generate the mating pool
         app._population.naturalSelection();
         // create the next generation

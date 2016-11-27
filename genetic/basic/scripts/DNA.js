@@ -81,7 +81,7 @@ class DNA {
      */
     calcFitness (target) {
         let score = 0;
-        for (let i = 0; i < target.length; i++) {
+        for (let i = 0; i < this._genes.length; i++) {
             if (this._genes[i] == target[i]) {
                 score++;
             }
@@ -98,16 +98,16 @@ class DNA {
      * @memberOf DNA
      */
     crossover (dna) {
-        let result = new DNA(this._genes.length);
+        let child = new DNA(this._genes.length);
         let crossPoint = Math.floor(Math.random() * this._genes.length);
         for (let i = 0; i < this._genes.length; i++) {
             if (i > crossPoint) {
-                result._genes[i] = this._genes[i];
+                child._genes[i] = this._genes[i];
             } else {
-                result._genes[i] = dna._genes[i];
+                child._genes[i] = dna._genes[i];
             }
         }
-        return result;
+        return child;
     }
 
     /**
