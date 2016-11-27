@@ -1,6 +1,4 @@
 let app = {
-    _bestElement: document.getElementById('best'),
-    _targetElement: document.getElementById('target'),
     _histElement: document.getElementById('hist')
 }
 
@@ -9,8 +7,7 @@ let app = {
  */
 function setup () {
     // target phrase
-    app._target = "to be or not to be";
-    app._targetElement.innerText = app._target;
+    app._target = "hello world abc";
     // population size
     app._popsize = 200;
     // mutation rate
@@ -20,20 +17,18 @@ function setup () {
 };
 
 /**
- * Update the screen data
+ * Update the data on the screen
  */
 function draw () {
-    app._bestElement.innerText = app._population.best;
-    app._histElement.innerHTML += '<tr><td>' + app._population.best +'</td><td>' + app._population._bestScore + '</td></tr>';
+    app._histElement.innerHTML += '<tr><td>' + app._population._generation + '</td><td>' + app._population._best +'</td><td>' + app._population._bestScore + '</td></tr>';
 }
 
 /**
  * Run the algorithm
  */
 function run () {
-    let i = 0;
     // while the phrase is still not found, run the algorithm
-    while (!app._population.finished && i < 800) {
+    while (!app._population._finished) {
         // generate the mating pool
         app._population.naturalSelection();
         // create the next generation
@@ -43,7 +38,6 @@ function run () {
         // evaluate
         app._population.evaluate();
         draw();
-        i++;
     }
 }
 

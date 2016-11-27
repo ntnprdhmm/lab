@@ -3,9 +3,8 @@ class DNA {
     /**
      * Creates an instance of DNA.
      * 
-     * @param {any} len => the the number of genes of this DNA
+     * @param {any} len => the number of genes of this DNA
      * 
-     * @memberOf DNA
      */
     constructor (len) {
         this._genes = [];
@@ -19,7 +18,6 @@ class DNA {
      * 
      * @param {any} len => the number of genes in this DNA
      * 
-     * @memberOf DNA
      */
     initGenes (len) {
         for (let i = 0; i < len; i++) {
@@ -30,9 +28,6 @@ class DNA {
     /**
      * Return a random char of the var alphabet
      * 
-     * @returns
-     * 
-     * @memberOf DNA
      */
     randomAlphabetChar () {
         let alphabet = 'abcdefghijklmnopqrstuvwxyz '.split('');
@@ -42,42 +37,16 @@ class DNA {
     /**
      * Convert the DNA genes to a string and return it
      * 
-     * @readonly
-     * 
-     * @memberOf DNA
      */
     get phrase () {
         return this._genes.join('');
     }
 
     /**
-     * Return the fitness attribute
-     * 
-     * @readonly
-     * 
-     * @memberOf DNA
-     */
-    get fitness () {
-        return this._fitness;
-    }
-
-    /**
-     * Set the value of fitness
-     * 
-     * 
-     * @memberOf DNA
-     */
-    set fitness (f) {
-        this._fitness = f;
-    }
-
-    /**
      * Return the percentage of correct characters
      * 
      * @param {any} target => the string to check with
-     * @returns
      * 
-     * @memberOf DNA
      */
     calcFitness (target) {
         let score = 0;
@@ -93,9 +62,9 @@ class DNA {
      * Cross two DNA genes at a random point and return the result
      * 
      * @param {any} dna => the other DNA object to cross with
-     * @returns
      * 
-     * @memberOf DNA
+     * @return a new DNA
+     * 
      */
     crossover (dna) {
         let child = new DNA(this._genes.length);
@@ -115,7 +84,6 @@ class DNA {
      * 
      * @param {any} rate
      * 
-     * @memberOf DNA
      */
     mutate (rate) {
         for (let i = 0; i < this._genes.length; i++) {

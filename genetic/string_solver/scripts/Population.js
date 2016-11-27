@@ -7,7 +7,6 @@ class Population {
      * @param {any} len         => the populationLength
      * @param {any} mutation    => the mutation rate
      * 
-     * @memberOf Population
      */
     constructor (phrase, len, mutation) {
         this._phrase = phrase;          // the phrase to search
@@ -23,46 +22,11 @@ class Population {
     }
 
     /**
-     * return the best phrase found in the last generation
-     * 
-     * @readonly
-     * 
-     * @memberOf Population
-     */
-    get best () {
-        return this._best;
-    }
-
-    /**
-     * Is the algorithm finished ?
-     * 
-     * @readonly
-     * 
-     * @memberOf Population
-     */
-    get finished () {
-        return this._finished;
-    }
-
-    /**
-     * Get the best phrase fitness
-     * 
-     * @readonly
-     * 
-     * @memberOf Population
-     */
-    get bestScore () {
-        return this._bestScore;
-    }
-
-
-    /**
      * Init the population of DNA
      * 
      * @param {any} populationLength
      * @param {any} phraseLength
      * 
-     * @memberOf Population
      */
     initPopulation (populationLength, phraseLength) {
         for (let i = 0; i < populationLength; i++) {
@@ -74,8 +38,6 @@ class Population {
     /**
      * Calculate the fitness of each DNA of this population on this.phrase
      * 
-     * 
-     * @memberOf Population
      */
     calcFitness () {
         for (let i = 0; i < this._population.length; i++) {
@@ -86,8 +48,6 @@ class Population {
     /**
      * Create a mating pool
      * 
-     * 
-     * @memberOf Population
      */
     naturalSelection () {
         // clear the next population
@@ -95,13 +55,13 @@ class Population {
         // get the max fitness of the current population
         let maxFitness = 0;
         for (let i = 0; i < this._population.length; i++) {
-            if (this._population[i].fitness > maxFitness) {
-                maxFitness = this._population[i].fitness;
+            if (this._population[i]._fitness > maxFitness) {
+                maxFitness = this._population[i]._fitness;
             }
         }
         // selection by probability based on DNA fitness
         for (let i = 0; i < this._population.length; i++) {
-            let n = Math.floor((this._population[i].fitness / maxFitness) * 100);  
+            let n = Math.floor((this._population[i]._fitness / maxFitness) * 100);  
             for (let j = 0; j < n; j++) {              
                 this._matingPool.push(this._population[i]);
             }
@@ -111,8 +71,6 @@ class Population {
     /**
      * Create the new generation from the mating pool
      * 
-     * 
-     * @memberOf Population
      */
     generate () {
         // Refill the population with DNA selected in the mating pool
@@ -131,17 +89,15 @@ class Population {
     /**
      * Search the best phrase in the population and check if it's the target phrase
      * 
-     * 
-     * @memberOf Population
      */
     evaluate () {
         let score = 0;
         let index = 0;
 
         for (let i = 0; i < this._population.length; i++) {
-            if (this._population[i].fitness > score) {
+            if (this._population[i]._fitness > score) {
                 index = i;
-                score = this._population[i].fitness;
+                score = this._population[i]._fitness;
             }
         }
 

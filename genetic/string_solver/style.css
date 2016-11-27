@@ -15,15 +15,3 @@ html, body {
     padding: 10px;
     vertical-align:top;
 }
-
-#target, #best {
-    font-size: 32px;
-}
-
-#hist-title {
-    font-size: 24px;
-}
-
-#target, #hist-title {
-    font-weight: bold;
-}
