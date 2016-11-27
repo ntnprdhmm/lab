@@ -9,12 +9,12 @@ let app = {
  */
 function setup () {
     // target phrase
-    app._target = "To be or not to be";
+    app._target = "to be or not to be";
     app._targetElement.innerText = app._target;
     // population size
     app._popsize = 200;
     // mutation rate
-    app._mutation = 0.1;
+    app._mutation = 0.01;
     // create the population
     app._population = new Population(app._target, app._popsize, app._mutation);
 };
@@ -33,7 +33,7 @@ function draw () {
 function run () {
     let i = 0;
     // while the phrase is still not found, run the algorithm
-    while (!app._population.finished && i < 2000) {
+    while (!app._population.finished && i < 800) {
         // generate the mating pool
         app._population.naturalSelection();
         // create the next generation
