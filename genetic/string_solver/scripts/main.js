@@ -1,5 +1,5 @@
 let app = {
-    _histElement: document.getElementById('hist')
+    _histElement: document.getElementById('current')
 }
 
 /**

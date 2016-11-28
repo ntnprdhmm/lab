@@ -9,9 +9,45 @@ html, body {
     height: 100%;
 }
 
-.panel {
-    display: inline-block;
+.container {
+    display: table;
+    width: 100%;
+}
+
+#left, #right {
     width: 49%;
+    display: table-cell;
+}
+
+#left {
+    border-right: 1px solid #333;
     padding: 10px;
-    vertical-align:top;
+}
+
+#hist {
+    margin: 10px;
+}
+
+#header {
+    border-bottom: 1px solid #333;
+}
+
+#search-form .form-group {
+    padding: 10px 20px 0 20px;
+}
+
+#search-form .form-label {
+    float: left;
+    text-align: right;
+    width: 150px;
+    margin-right: 10px;
+}
+
+#search-form .form-input-container {
+    display: inline-block;
+    width: calc(100% - 200px);
+}
+
+#search-form .form-input {
+    width: 100%;
 }
