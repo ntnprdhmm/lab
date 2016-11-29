@@ -25,19 +25,19 @@
                     <div class="form-group"> 
                         <label class="form-label" for="phrase">Phrase</label>
                         <div class="form-input-container">
-                            <input class="form-input" type="text" id="phrase">
+                            <input class="form-input" type="text" id="phrase" value="hello world">
                         </div>
                     </div>
                     <div class="form-group"> 
                         <label class="form-label" for="popsize">Population size</label>
                         <div class="form-input-container">
-                            <input class="form-input" type="text" id="popsize">
+                            <input class="form-input" type="text" id="popsize" value="1000">
                         </div>
                     </div>
                     <div class="form-group"> 
                         <label class="form-label" for="rate">Mutation rate</label>
                         <div class="form-input-container">
-                            <input class="form-input" type="text" id="rate">
+                            <input class="form-input" type="text" id="rate" value="0.02">
                         </div>
                     </div>
                     <div class="btn-container">
@@ -47,7 +47,15 @@
             </div>
             <!-- previous results -->
             <div id="hist">
-
+                <table id="hist-table">
+                    <tr>
+                        <th></th>
+                        <th>Target</th>
+                        <th>Nb generations</th>
+                        <th>Pop size</th>
+                        <th>Mutation rate</th>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

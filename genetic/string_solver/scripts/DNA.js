@@ -30,7 +30,6 @@ class DNA {
      * 
      */
     randomAlphabetChar () {
-        let alphabet = 'abcdefghijklmnopqrstuvwxyz '.split('');
         return alphabet[Math.floor(Math.random() * alphabet.length)];
     }
 

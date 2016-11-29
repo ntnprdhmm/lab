@@ -51,3 +51,8 @@ html, body {
 #search-form .form-input {
     width: 100%;
 }
+
+.btn-container {
+    text-align: center;
+    margin: 10px 0;
+}
